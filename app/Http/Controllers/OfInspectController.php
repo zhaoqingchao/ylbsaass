@@ -169,7 +169,7 @@ class OfInspectController extends Controller
 	//检查项目列表
 	public function LisetInspects($value='')
 	{
-		# code...
+		# code...tis
 	}
 
 
