@@ -1,0 +1,61 @@
+@media all  {
+    .logo{
+        text-align: center;
+
+    }
+    .set-login{
+        margin-top: 20px;
+        text-align: left;
+    }
+    .set-login input{
+        width: 60%;
+        margin-left: 20%;
+        height: 30px;
+        color: white;
+        background: #00C1B3;
+        border-radius: 2px;
+        outline: none;
+        border: none;
+
+    }
+    #login{
+
+        margin:  0 auto;
+        text-align:center;
+        margin-top: 50px;
+    }
+    #userName,#pwd{
+        height: 30px;
+        background: url("../images/login.png") 4px 4px no-repeat ;
+        padding-left: 30px;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #1a1a1a;
+        -webkit-background-size: 20px;
+        background-size: 20px;
+        margin-bottom: 20px;
+    }
+    .userName{
+
+        position: relative;
+        margin-left: 3%;
+        width:94%;
+    }
+    .userPwd input {
+        background: url("../images/login.png") 4px 4px no-repeat ;
+    }
+    .lose-pwd,.register{
+        width: 48%;
+        padding-left: 5px;
+        display: inline-block;
+        text-align: left;
+        font-size: 0.8em;
+    }
+    .register{
+        text-align: right;
+        padding-right: 5px;
+    }
+    .register a{
+        color: #1ba1e2;
+    }
+}

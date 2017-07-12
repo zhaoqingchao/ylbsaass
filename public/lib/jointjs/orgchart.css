@@ -1,0 +1,123 @@
+
+p.center {
+    text-align: center;
+}
+/* Paper */
+
+#paper-container {
+    width: 100%;
+    height: 600px;
+    background: #fff;
+}
+#paper-container .joint-paper > svg {
+    overflow: visible;
+}
+
+.joint-paper-scroller.joint-theme-modern .joint-paper {
+    box-shadow: none;
+}
+/* Shapes */
+
+.joint-link {
+    pointer-events: none;
+}
+.btn {
+    cursor: pointer;
+}
+.btn:hover circle,
+.btn:hover rect {
+    fill: #c7c8e0;
+}
+
+/* Inspector */
+
+.joint-inspector.joint-theme-modern {
+    position: relative;
+    background: white;
+}
+.joint-inspector.joint-theme-modern .field {
+    margin-bottom: 10px;
+}
+.joint-inspector.joint-theme-modern input[type="text"],
+.joint-inspector.joint-theme-modern textarea,
+.joint-inspector.joint-theme-modern .joint-select-box.joint-theme-modern {
+    color: #666;
+    border: 4px solid #ededed;
+    font-size: 16px;
+}
+.joint-inspector.joint-theme-modern .joint-select-box.joint-theme-modern .select-box-selection {
+    color: #666;
+}
+.joint-inspector.joint-theme-modern .joint-select-box.joint-theme-modern:not(.joint-color-palette) .select-box-selection {
+    padding: 4px 12px;
+    border: none;
+}
+.joint-select-box.joint-theme-modern .select-box-option {
+    color: #666;
+}
+.joint-select-box-options.joint-color-palette.joint-theme-modern {
+    width: 180px;
+}
+.joint-inspector.joint-theme-modern .joint-select-box.joint-color-palette.joint-theme-modern div.select-box-selection {
+    border: none;
+}
+.joint-inspector.joint-theme-modern label {
+    color: #555;
+    font-weight: normal;
+    margin: 0 0 3px 2px;
+}
+.joint-select-box.joint-color-palette.joint-theme-modern .select-box-selection .select-box-option-content {
+    border-radius: 0;
+}
+
+/* Dialog */
+
+.joint-dialog.joint-theme-modern .titlebar {
+    text-shadow: none;
+    background-color: #EFEFEF;
+    color: #333;
+    border-bottom: 0;
+}
+.joint-dialog.joint-theme-modern .fg {
+    top: 0;
+    bottom: 0;
+    display: table;
+    margin: auto;
+}
+.joint-dialog.joint-theme-modern .controls .control-button {
+    margin-top: 10px;
+}
+.joint-dialog.joint-theme-modern .joint-inspector input {
+    height: 39px;
+}
+/* Tree Layout View */
+
+.tree-layout-preview-group.joint-theme-modern .tree-layout-preview {
+    stroke: #212135;
+    stroke-width: 5;
+}
+.tree-layout-preview-group.joint-theme-modern .tree-layout-preview.child {
+    fill: #212135;
+    stroke: #c7c8e0;
+}
+.tree-layout-preview-group.joint-theme-modern .tree-layout-preview.parent {
+    fill: none;
+}
+.joint-tree-layout.joint-theme-modern .tree-layout-box.active {
+    opacity: 0.3;
+    border-color: #212135;
+    border-width: 3px;
+    margin: 0;
+    margin-left: -4px;
+    margin-top: -1px;
+    padding-right: 2px;
+}
+.joint-tree-layout.joint-theme-modern .tree-layout-box.translate {
+    border-width: 3px;
+}
+.joint-tree-layout.joint-theme-modern .tree-layout-box.translate svg {
+    margin-top: 2px;
+}
+.tree-layout-mask.dropping-not-allowed {
+    z-index: 101;
+}
