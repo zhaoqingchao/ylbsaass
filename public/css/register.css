@@ -81,12 +81,11 @@
     }
     .modal-content{
         border: 1px solid #B6B6B6;
-        position: absolute;
-        left: 9%;
-        width: 80%;
-        top:30%;
         background: white;
         border-radius: 4px;
+        margin: 180px auto;
+        width: 240px;
+
     }
     .x{
         position: absolute;
@@ -105,23 +104,25 @@
         margin-bottom: 10px;
     }
     .code-content{
-        height: 60px;
+        height: 50px;
         margin-left: 10%;
         width: 80%;
         background: #f2f2f2;
         margin-bottom: 10px;
     }
+
     .input-code,.modal-btn{
-        height: 20px;
+        height: 35px;
         margin-left: 10%;
         width: 80%;
         margin-bottom: 10px;
 
     }
     .input-code input{
+        padding-left: 5px;
         outline: none;
         width: 100%;
-        height: 20px;
+        height: 35px;
     }
     .modal-btn{
         display: flex;

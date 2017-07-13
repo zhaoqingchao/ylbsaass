@@ -8,7 +8,7 @@ function Register(){
     //密码是否可视
     this.cansee = 1;
     //条形码的验证
-    this.codeVer = 0;
+    //this.codeVer = 0;
     //确认密码是否可视
     this.canseeagian = 1;
     //公司名称
@@ -24,7 +24,7 @@ Register.prototype.init = function(){
 }
 //返回按钮
 Register.prototype.noRegister = function(){
-    location.href = 'userloginhtml';
+    location.href = '/userloginhtml';
 }
 //条形验证码的取消和X
 Register.prototype.codeCancel = function(){
@@ -39,25 +39,68 @@ Register.prototype.showModal = function(){
 //条形验证码的确定
 Register.prototype.codeOk = function(){
     var $this =this;
-    if(0){
-
-    }else if(0){
-
-    }else {
-        $this.codeVer = 1
-    }
-    if($this.codeVer){
-        $('.modal').hide();
-        $this.getCode();
-    }else {
-        layer.alert('请输入正确的验证码', {
+    var phoneReg = /^1[3|5|7|8|9]\d{9}$/;
+    this.usermobile = $('#usermobile').val();
+    var verify_code = $('#photoCode').val();
+    var token = $('#token').val();
+    
+    var url = '/sendsms';
+    var params = {
+        _token:token,
+        captcha:verify_code,
+        usermobile:$this.usermobile
+        
+    };
+    //alert(JSON.stringify(params));
+    if(!phoneReg.test($this.usermobile)) {
+        layer.alert('请输入正确的手机号', {
             icon: 6,
             layer: 'layer-ext-moon'
         });
+    }else if(verify_code == ''){
+        layer.alert('图形验证码不能为空', {
+            icon: 6,
+            layer: 'layer-ext-moon'
+        });
+    }else{
+        $.post(url,params,function(data, status) {
+            if (data == 'fail') {
+                layer.alert('短信发送失败，请重新发送');
+            }else if(data == 'codefail'){
+                layer.alert('图形验证码错误');
+            }else{
+                $('.modal').hide();
+                $this.getCode();
+            }
+        })
     }
 
 
+
+
+
 }
+//使用定时器刷新验证码的秒数
+Register.prototype.getCode = function() {
+    var wait = 60;
+    var $this = this;
+    var getData = function () {
+        if (wait == 0) {
+            $('#getCode').attr("disabled", false);
+            $('#getCode').html('获取验证码');
+            wait = 60;
+        } else {
+            $('#getCode').attr("disabled", true);
+            $('#getCode').html(wait + "秒后,重新获取");
+            wait--;
+            setTimeout(function (){
+                getData()
+            }, 1000)
+        }
+    };
+    getData();
+};
+
 
 //密码是否可视
 Register.prototype.canSeePassword = function(item){
@@ -66,13 +109,13 @@ Register.prototype.canSeePassword = function(item){
             $('#userpassword').hide();
             $('#userpassword1').show();
             $('#userpassword1').val($('#userpassword').val());
-            $('.pwd-see').attr('src','images/cansee-set.png');
+            $('.pwd-see').attr('src','/images/cansee-set.png');
             this.cansee = 0;
         }else{
             $('#userpassword1').hide();
             $('#userpassword').show();
             $('#userpassword').val($('#userpassword1').val());
-            $('.pwd-see').attr('src','images/cansee.png');
+            $('.pwd-see').attr('src','/images/cansee.png');
             this.cansee = 1;
         }
     }else{
@@ -80,13 +123,13 @@ Register.prototype.canSeePassword = function(item){
             $('#userpasswordonce').hide();
             $('#userpasswordonce1').show();
             $('#userpasswordonce1').val($('#userpasswordonce').val());
-            $('.pwd-see1').attr('src','images/cansee-set.png');
+            $('.pwd-see1').attr('src','/images/cansee-set.png');
             this.canseeagian = 0;
         }else{
             $('#userpasswordonce1').hide();
             $('#userpasswordonce').show();
             $('#userpasswordonce').val($('#userpasswordonce1').val());
-            $('.pwd-see1').attr('src','images/cansee.png');
+            $('.pwd-see1').attr('src','/images/cansee.png');
             this.canseeagian = 1;
         }
     }
@@ -101,29 +144,29 @@ Register.prototype.replaceIcon = function(){
     var userpasswordval = $('#userpassword').val().replace(/\s/,'');
     var userpasswordonce = $('#userpasswordonce').val().replace(/\s/,'');
     if(companynameval !=''){
-        $('.userCom img').attr('src','images/app-company-set.png');
+        $('.userCom img').attr('src','/images/app-company-set.png');
     }else{
-        $('.userCom img').attr('src','images/app-company.png');
+        $('.userCom img').attr('src','/images/app-company.png');
     }
     if(usermobileval !=''){
-        $('.userName img').attr('src','images/usermobile-set.png');
+        $('.userName img').attr('src','/images/usermobile-set.png');
     }else{
-        $('.userName img').attr('src','images/usermobile.png');
+        $('.userName img').attr('src','/images/usermobile.png');
     }
     if(code !=''){
-        $('.code-icon').attr('src','images/ver-set.png');
+        $('.code-icon').attr('src','/images/ver-set.png');
     }else{
-        $('.code-icon').attr('src','images/ver.png');
+        $('.code-icon').attr('src','/images/ver.png');
     }
     if(userpasswordval !=''){
-        $('.pwd-icon').attr('src','images/password-set.png');
+        $('.pwd-icon').attr('src','/images/password-set.png');
     }else{
-        $('.pwd-icon').attr('src','images/password.png');
+        $('.pwd-icon').attr('src','/images/password.png');
     }
     if(userpasswordonce !=''){
-        $('.pwd-icon1').attr('src','images/password-set.png');
+        $('.pwd-icon1').attr('src','/images/password-set.png');
     }else{
-        $('.pwd-icon1').attr('src','images/password.png');
+        $('.pwd-icon1').attr('src','/images/password.png');
     }
 }
 
@@ -183,52 +226,6 @@ Register.prototype.register = function(){
         code:$("#code").val()
 
     };
-    $.ajax({
-        type: 'GET',
-        url: url,
-        success: function(data, status) {
-            if (data.errcode==0) {
-//向服务器提交信息
-                $.ajax({
-                    type: 'POST',
-                    url: "向服务器提交你们索要填写的信息接口",
-                    data: params,
-                    success: function(msg, status) {
-                        if(msg && msg == 'exist'){
-                            layer.alert('手机号已存在，请登录', {
-                                icon: 6,
-                                layer: 'layer-ext-moon'
-                            },function(){
-                                location.href = 'userloginhtml';
-                            });
-                        }else if(msg == 'success'){
-                            layer.alert('注册成功，请登录', {
-                                icon: 6,
-                                layer: 'layer-ext-moon'
-                            },function(){
-                                location.href = 'userloginhtml';
-                            });
-                        }else{
-                            layer.alert('注册失败，请重新注册', {
-                                icon: 6,
-                                layer: 'layer-ext-moon'
-                            },function(){
-                                location.href = 'registerhtml';
-                            });
-                        }
-                    },
-                    error: function(data, status) {
-                        alert(data.errMsg);
-                    }
-                });
-            }else{
-                alert("验证码不正确！");
-            }
-        },
-        error: function(data, status) {
-            alert(status);
-        }
-    })
     $.post(url,params,function(msg){
         console.log(msg);
         if(msg && msg == 'exist'){
@@ -245,6 +242,11 @@ Register.prototype.register = function(){
             },function(){
                 location.href = 'userloginhtml';
             });
+        }else if(msg == 'smscodeerror'){
+            layer.alert('手机短信验证码错误', {
+                icon: 6,
+                layer: 'layer-ext-moon'
+            });
         }else{
             layer.alert('注册失败，请重新注册', {
                 icon: 6,
@@ -256,43 +258,5 @@ Register.prototype.register = function(){
     });
 
 }
-//使用定时器刷新验证码的秒数
-Register.prototype.getCode = function() {
-    var wait = 60;
-    var url = './register';
-    $.ajax({
-        type: 'GET',
-        url:url,
-        success: function(data, status) {
-            if (data.errcode==0) {
-                alert("已发送");
-                $(".code1").attr("disabled", "disabled");
-                $(".code1").css("background-color", "#b4b2b3");
-                var getData = function(){
-                    if (wait == 0) {
-                        $('#getCode').attr("disabled", false);
-                        $('#getCode').html('获取验证码');
-                        wait = 60;
-                    } else {
-                        $('#getCode').attr("disabled", true);
-                        $('#getCode').html(wait+"秒后,重新获取");
-                        wait--;
-                        var timer = setTimeout(function () {
-                            getData()
-                        },1000)
-                    };
-                }
-                getData();
-            }else{
-                alert("发送失败，请再试一次。");
-            }
-        },
-        error: function(data, status) {
-            alert(status);
-        }
-
-    })
-};
-
 
 var  $Register = new Register();

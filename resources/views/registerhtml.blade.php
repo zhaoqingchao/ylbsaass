@@ -63,10 +63,11 @@
                 <span>条形验证码验证</span>
             </div>
             <div class="code-content">
-
+                <img src="{{ url('captcha/mews') }}"  onclick="this.src='{{url('captcha/mews') }}?r='+Math.random();" alt="">
             </div>
             <div class="input-code">
-                <input type="text" maxlength="4"placeholder="请输入条形验证码">
+                <input type="text" id="photoCode" maxlength="5" placeholder="请输入条形验证码">
+                
             </div>
             <div class="modal-btn">
                 <button class="cancel" onclick="$Register.codeCancel()">取消</button>

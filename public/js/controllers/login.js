@@ -65,7 +65,7 @@ UserLogin.prototype.remindMe = function(dom){
 }
 //注册新账号跳转
 UserLogin.prototype.toRegister = function(dom){
-    location.href = 'register.html';
+    location.href = 'registerhtml';
 }
 //手机号的验证
 UserLogin.prototype.verification = function(){
@@ -115,6 +115,7 @@ UserLogin.prototype.userLogin = function(){
         usermobile:$this.usermobile,
         userpassword : $this.userpassword
     }
+   // alert(JSON.stringify(params));
     $.post(
         url, params,function(msg){
         console.log(msg);

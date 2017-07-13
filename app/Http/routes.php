@@ -75,8 +75,8 @@ Route::get('appmainhtml', function(){
 Route::post('register', 'OfUserController@Register');
 //管理员登录
 Route::post('userlogin', 'OfUserController@UserLogin');
-
-
+//Route::get('sendsms/{usermobile}/{verify_code}', 'OfUserController@SendSms');
+Route::post('sendsms', 'OfUserController@SendSms');
 //公司职务
 Route::get('showposthtml', function(){
 	return view('showposthtml');

@@ -13,6 +13,10 @@ use App\PushMessage;
 use Flc\Alidayu\Client;
 use Flc\Alidayu\App;
 use Flc\Alidayu\Requests\AlibabaAliqinFcSmsNumSend;
+use Validator;
+use Captcha;
+use Illuminate\Support\Facades\Session;
+ 
 
 class OfUserController extends Controller
 {
@@ -21,6 +25,11 @@ class OfUserController extends Controller
     {
         $usermobile = $request->input('usermobile');
         $userpassword = Hash::make($request->input('userpassword'));
+        $verify_smscode = $request->input('code');//判断手机短信验证
+        if($verify_smscode != session('verify_smscode'))
+        {
+            return "smscodeerror";die;
+        }
         //判断手机号是否存在
         $whereuser = OfUsers::where('usermobile',$usermobile)->first();
         if($whereuser){
@@ -91,26 +100,38 @@ class OfUserController extends Controller
     //阿里大鱼短信验证
     public function SendSms(Request $request)
     {
+        $usermobile = $request->input('usermobile');
+        $rules = ['captcha' => 'required|captcha'];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails())
+        {
+            return "codefail";die;
+        }
         // 配置信息
         $config = [
-            'app_key'    => '*****',
-            'app_secret' => '************',
+            'app_key'    => env('ALIDAYU_APP_KEY'),
+            'app_secret' => env('ALIDAYU_SECRETKEY'),
         ];
-
+        $verify = rand(123456, 999999);
         $client = new Client(new App($config));
         $req    = new AlibabaAliqinFcSmsNumSend;
 
-        $req->setRecNum('13312311231')
-            ->setSmsParam([
-                'number' => rand(100000, 999999)
-            ])
-            ->setSmsFreeSignName('叶子坑')
-            ->setSmsTemplateCode('SMS_15105357');
+        $req->setRecNum($usermobile);
+        $req->setSmsFreeSignName(env('ALIDAYU_SIGN'));
+        $req->setSmsTemplateCode('SMS_13191874');
+        $req ->setSmsParam(['code'=>"$verify",'minute'=>'10']);
+ 
+        $resp = $client->execute($req);
 
-        $resp = $client->execute($req)
-
-        print_r($resp);
-        print_r($resp->result->model);
+        //print_r($resp);
+        //print_r($resp->result->success);
+        if($resp && isset($resp->result) && $resp->result->err_code==0 && $resp->result->success == 1) {
+            session(['verify_smscode'=>$verify]);
+          
+            return 'success';
+        }else{
+            return 'fail';
+        }
     }
 
 
