@@ -16,7 +16,7 @@ use Flc\Alidayu\Requests\AlibabaAliqinFcSmsNumSend;
 use Validator;
 use Captcha;
 use Illuminate\Support\Facades\Session;
- 
+
 
 class OfUserController extends Controller
 {
@@ -92,10 +92,12 @@ class OfUserController extends Controller
             return "账号密码错误，重新登录";
         }
     }
-    //添加用户信息
-    public  function AddUser($value='')
+    //添加员工用户信息
+    public  function AddUser(Request $request)
     {
         echo session('userid');
+        $adduser = O;
+
     }
     //阿里大鱼短信验证
     public function SendSms(Request $request)
