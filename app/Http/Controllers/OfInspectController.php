@@ -167,9 +167,13 @@ class OfInspectController extends Controller
 		}
 	}
 	//检查项目列表
-	public function LisetInspects($value='')
+	public function ListInspects($value='')
 	{
-		# code...tis
+		$listinspects = OfInspect::orderBy('id','DESC')->get();
+		if($listinspects)
+		{
+			return json_encode($listinspects);
+		}
 	}
 
 

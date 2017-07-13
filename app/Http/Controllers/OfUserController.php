@@ -10,6 +10,9 @@ use App\OfCompany;
 use Illuminate\Support\Facades\Hash;
 use Redirect, Input, Auth;
 use App\PushMessage;
+use Flc\Alidayu\Client;
+use Flc\Alidayu\App;
+use Flc\Alidayu\Requests\AlibabaAliqinFcSmsNumSend;
 
 class OfUserController extends Controller
 {
@@ -85,6 +88,31 @@ class OfUserController extends Controller
     {
         echo session('userid');
     }
+    //阿里大鱼短信验证
+    public function SendSms(Request $request)
+    {
+        // 配置信息
+        $config = [
+            'app_key'    => '*****',
+            'app_secret' => '************',
+        ];
+
+        $client = new Client(new App($config));
+        $req    = new AlibabaAliqinFcSmsNumSend;
+
+        $req->setRecNum('13312311231')
+            ->setSmsParam([
+                'number' => rand(100000, 999999)
+            ])
+            ->setSmsFreeSignName('叶子坑')
+            ->setSmsTemplateCode('SMS_15105357');
+
+        $resp = $client->execute($req)
+
+        print_r($resp);
+        print_r($resp->result->model);
+    }
+
 
 
 

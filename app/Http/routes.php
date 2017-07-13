@@ -118,7 +118,7 @@ Route::post('addinspecttype', 'OfInspectController@AddInspectType');//编辑新�
 Route::post('addinspects', 'OfInspectController@AddInspects');//
 Route::post('addinspectsitem', 'OfInspectController@AddInspectsItem');//
 Route::get('showinspects/{$id}', 'OfInspectController@ShowInspects');
-
+Route::get('listinspects', 'OfInspectController@ListInspects');
 
 
 

@@ -1,61 +1,92 @@
 @media all  {
+    html{
+        font-size: 62.5%;
+        font-family: "微软雅黑";
+    }
     .logo{
+        padding-top: 35px;
+        height: 175px;
         text-align: center;
 
     }
-    .set-login{
-        margin-top: 20px;
-        text-align: left;
-    }
-    .set-login input{
-        width: 60%;
-        margin-left: 20%;
-        height: 30px;
-        color: white;
-        background: #00C1B3;
-        border-radius: 2px;
-        outline: none;
-        border: none;
+    .logo img{
+        height: 105px;
+        width: 145px;
 
     }
+    #container{
+        padding-left: 13.4%;
+        padding-right: 13.3%;
+        background:#F2F2F2;
+    }
+
     #login{
-
+        font-size: 15px;
+        color: #3A3A3A;
         margin:  0 auto;
-        text-align:center;
-        margin-top: 50px;
     }
-    #userName,#pwd{
-        height: 30px;
-        background: url("../images/login.png") 4px 4px no-repeat ;
-        padding-left: 30px;
+    .userName,.userPwd{
+        position: relative;
+        margin-bottom: 19px;
+        height: 35px;
+        border-bottom: 1px solid #B6B6B6;
+    }
+    .userName img,.userPwd img{
+        margin-top: 6.5px;
+        width: 22px;
+        height: 22px;
+    }
+    #usermobile,#userpassword,#userpassword1{
+        position: absolute;
+        left: 25px;
+        top: 10px;
         border: none;
         outline: none;
-        border-bottom: 1px solid #1a1a1a;
-        -webkit-background-size: 20px;
-        background-size: 20px;
-        margin-bottom: 20px;
+        background:#F2F2F2;
     }
-    .userName{
+    .pwd-see{
+        float: right;
+    }
+    .set-login{
+        margin-top: 36px;
+        margin-bottom: 15px;
+    }
+    .set-register input,.set-login input{
+        height: 40px;
+        color: white;
+        background: #2A9A08;
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        width: 100%;
 
+    }
+    .set-register input{
+        color: #3A3A3A;
+        background: #F2F2F2;
+        border: 1px solid #B6B6B6;
+    }
+    .lost-pwd{
+        margin-top: 80px;
+        display: flex;
+        flex-direction: row;
+    }
+    .remind-me{
+        flex: 1;
         position: relative;
-        margin-left: 3%;
-        width:94%;
     }
-    .userPwd input {
-        background: url("../images/login.png") 4px 4px no-repeat ;
+    .remind-me img{
+        width: 20px;
+        height: 20px;
+
     }
-    .lose-pwd,.register{
-        width: 48%;
-        padding-left: 5px;
-        display: inline-block;
-        text-align: left;
-        font-size: 0.8em;
+    .remind{
+        position: absolute;
+        top:0px;
+        left: 23px;
+
     }
-    .register{
-        text-align: right;
-        padding-right: 5px;
-    }
-    .register a{
-        color: #1ba1e2;
+    .lose{
+
     }
 }

@@ -40,12 +40,12 @@
             <div class="content">
                 <div class="title">Laravel 5</div>
             
-        <form method="post" action="/appliesflow" enctype="multipart/form-data" name="forms">
+        <form method="post" action="/userlogin" enctype="multipart/form-data" name="forms">
             {{ csrf_field() }}
             {{-- companyname<input type="text" name="wk_type" value="1" id="task-name" class="form-control"> --}}
             {{-- usermobile<input type="text" name="id" id="taskname" value="4" class="form-control"> --}}
-             <input type="text" name="appid" id="task-name" value="1" class="form-control">
-             <input type="text" name="appliesid" id="task-name" value="4" class="form-control">
+             <input type="text" name="usermobile" id="task-name" value="1" class="form-control">
+             <input type="text" name="userpassword" id="task-name" value="4" class="form-control">
              <input type="text" name="remark" id="task-name"   class="form-control">
              <label><input name="status" type="radio" value="1" />同意 </label> 
             <label><input name="status" type="radio" value="2" />不 </label> 
